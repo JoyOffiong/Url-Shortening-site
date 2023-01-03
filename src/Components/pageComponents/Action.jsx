@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import Modal from "./modal";
 import axios from "axios";
-
+// import CopyToClipboard from "react-copy-to-clipboard";
 
 
 export const Action = () => {
-  const [url, setUrl] = useState("");
+const [url, setUrl] = useState("");
+// const [longLink, setLongLink] = useState('');
 
-  const [shortLink, setShortLink] = useState("");
-  
-  const [showModal, setShowModal] = useState(false);
+
+  // const [shortLink, setShortLink] = useState('');
+  const [links , setLinks ] = useState(JSON.parse(localStorage.getItem ('res')) || [])
+const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     setUrl(e.target.value);
@@ -21,20 +23,42 @@ export const Action = () => {
         `https://api.shrtco.de/v2/shorten?url=${url}`
       );
       console.log(response, "it worked");
-      let res = response.data.result.full_short_link2;
-      setShortLink(res);
-      setUrl("");
-      console.log(url)
-      setShowModal(true)
       
+      let res = response.data.result.full_short_link2;
+     
+    const twolinks = {
+      'link1': res,
+      'link2': url
+    }
+    const pushedLinks = links.push(twolinks)
+    // setLinks( pushedLinks)
+    
+  localStorage.setItem('res', JSON.stringify(links)) 
+  // localStorage.setItem('url', JSON.stringify(url))
+
+  
+      fetchLink()
+     
     } catch (error) {
       console.log(error);
     }
   }
 
+  const fetchLink=()=>{
+    
+  const fetchedLinks=JSON.parse(localStorage.getItem('res')) 
+ setLinks(fetchedLinks)
+ console.log(links)
+
+    // const link1= localStorage.getItem('url')
+    // const link2= localStorage.getItem('res')
+
+// console.log(shortLink)
+      setShowModal(true)
+  }
 
   return (
-    <div className="phone: w-4/5 mx-auto items-center z-[10] relative laptop:w-3/5" >
+    <div className="phone: w-4/5 mx-auto items-center z-[10] relative laptop:w-4/5" >
       <div className="phone:mx-auto flex flex-col p-5 justify-between
        rounded items-center laptop:flex-row "
       style={{backgroundColor:'#3a3053', gap:"15px"}}>
@@ -59,11 +83,14 @@ export const Action = () => {
        
       </div>
 
-    
-  {showModal ? (<Modal shortLink={shortLink}
-      showModal={showModal}
-      setShowModal={setShowModal}/>): true}
 
+{showModal ? ( <Modal 
+links={links}
+// longLink={longLink}
+//  showModal ={showModal}
+  setShowModal = {setShowModal}
+ /> 
+  ): null}
 
 
       <div>

@@ -7,12 +7,10 @@ export function Header({showNavBar, navBar }) {
   return (
     <div className='flex items-center justify-between tablet:py-5 phone:pl-8 tablet:px-20 phone:py-3 fixed w-screen z-30 bg-white shadow-md'>
         <div className='flex items-center justify-between w-2/5'>
-
             <h3 className="text-3xl font-bold">Shortly</h3>
             <p className=' phone:hidden laptop:block text-gray-500 font-bold'>Features</p>
             <p className=' phone:hidden laptop:block text-gray-500 font-bold'>Pricing</p>
             <p className=' phone:hidden laptop:block text-gray-500 font-bold'>Resources</p>
-
         </div>
 
         <div className='flex items-center justify-between w-1/5'>
