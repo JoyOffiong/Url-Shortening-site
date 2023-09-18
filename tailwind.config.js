@@ -4,18 +4,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    screens: {
-      'phone':'300px',
-      // => @media (min-width: 320px) { ... }
 
-      'tablet': '640px',
-      // => @media (min-width: 640px) { ... }
-
-      'laptop': '1024px',
-      // => @media (min-width: 1024px) { ... }
-
-      'desktop': '1280px',
-      // => @media (min-width: 1280px) { ... }
+    extend: {},
+    colors:{
+    primaryColor:'#003153',
+    secondaryColor:"#fa8128",
+    tetiaryColor:"#f0deeb",
+    },
+    fontFamily: {
+      sans: ["poppins"],
     },
   },
   plugins: [],
